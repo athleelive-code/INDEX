@@ -5,374 +5,103 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AthleeLive（アスリーライブ） | 野球・スポーツ専門ライブ配信</title>
     <style>
-        /* 全体のリセットと共通設定 */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        body {
-            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
-            line-height: 1.6;
-            color: #111111;
-            background-color: #fafafa;
-        }
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif; line-height: 1.6; color: #111111; background-color: #fafafa; }
+        a { text-decoration: none; color: inherit; }
 
-        /* ヘッダー */
-        header {
-            background-color: #ffffff;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        .header-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 20px;
-        }
-        
-        /* ロゴ画像配置エリア */
-        .logo-area {
-            display: flex;
-            align-items: center;
-        }
-        .logo-img {
-            height: 52px;
-            width: auto;
-            display: block;
-        }
+        header { background-color: #ffffff; box-shadow: 0 2px 8px rgba(0,0,0,0.06); position: sticky; top: 0; z-index: 100; }
+        .header-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; }
+        .logo-area { display: flex; align-items: center; }
+        .logo-img { height: 52px; width: auto; display: block; }
+        nav ul { display: flex; list-style: none; align-items: center; }
+        nav ul li { margin-left: 24px; }
+        nav ul li a { font-weight: 700; color: #333333; transition: color 0.3s; font-size: 0.95rem; letter-spacing: 0.5px; }
+        nav ul li a:hover { color: #D60000; }
+        nav ul li .nav-sns { font-size: 0.9rem; padding: 4px 8px; border-radius: 4px; color: #fff; }
+        nav ul li .nav-youtube { background-color: #FF0000; }
+        nav ul li .nav-instagram { background: linear-gradient(45deg, #F77737, #E1306C, #C13584); }
+        nav ul li a.nav-sns:hover { color: #fff; opacity: 0.85; }
 
-        nav ul {
-            display: flex;
-            list-style: none;
-            align-items: center;
-        }
-        nav ul li {
-            margin-left: 24px;
-        }
-        nav ul li a {
-            font-weight: 700;
-            color: #333333;
-            transition: color 0.3s;
-            font-size: 0.95rem;
-            letter-spacing: 0.5px;
-        }
-        nav ul li a:hover {
-            color: #D60000;
-        }
+        .hero { background: linear-gradient(rgba(11, 11, 11, 0.55), rgba(11, 11, 11, 0.75)), url('https://static.wixstatic.com/media/2978e8_3a066a50b7354f48866251e93eb1f8a5.jpg/v1/fill/w_670,h_503,fp_0.50_0.50,q_90,enc_auto/2978e8_3a066a50b7354f48866251e93eb1f8a5.jpg') no-repeat center center/cover; color: #fff; height: 65vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 20px; }
+        .hero h1 { font-size: 2.8rem; margin-bottom: 18px; font-weight: 700; letter-spacing: 3px; text-shadow: 0 3px 15px rgba(0,0,0,0.6); }
+        .hero p { font-size: 1.3rem; margin-bottom: 35px; font-weight: 400; letter-spacing: 1px; text-shadow: 0 2px 8px rgba(0,0,0,0.6); }
+        .btn-cta { background-color: #D60000; color: #fff; padding: 15px 40px; border-radius: 4px; font-weight: 700; font-size: 1.15rem; transition: background 0.3s, transform 0.2s; box-shadow: 0 4px 18px rgba(214, 0, 0, 0.4); letter-spacing: 1px; }
+        .btn-cta:hover { background-color: #b30000; transform: translateY(-2px); }
 
-        /* ヘッダー用の小さなSNSアイコン風リンクスタイル */
-        nav ul li .nav-sns {
-            font-size: 0.9rem;
-            padding: 4px 8px;
-            border-radius: 4px;
-            color: #fff;
-        }
-        nav ul li .nav-youtube {
-            background-color: #FF0000;
-        }
-        nav ul li .nav-instagram {
-            background: linear-gradient(45deg, #F77737, #E1306C, #C13584);
-        }
-        nav ul li a.nav-sns:hover {
-            color: #fff;
-            opacity: 0.85;
-        }
+        section { padding: 90px 20px; max-width: 1050px; margin: 0 auto; }
+        .section-title { text-align: center; font-size: 2.2rem; color: #111111; margin-bottom: 60px; font-weight: 700; letter-spacing: 1px; }
+        .section-title::after { content: ''; display: block; width: 45px; height: 4px; background-color: #D60000; margin: 15px auto 0; }
 
-        /* メインビジュアル（野球中継・プロカメラのイメージ） */
-        .hero {
-            background: linear-gradient(rgba(11, 11, 11, 0.55), rgba(11, 11, 11, 0.75)), url('https://static.wixstatic.com/media/2978e8_3a066a50b7354f48866251e93eb1f8a5.jpg/v1/fill/w_670,h_503,fp_0.50_0.50,q_90,enc_auto/2978e8_3a066a50b7354f48866251e93eb1f8a5.jpg') no-repeat center center/cover;
-            color: #fff;
-            height: 65vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 0 20px;
-        }
-        .hero h1 {
-            font-size: 2.8rem;
-            margin-bottom: 18px;
-            font-weight: 700;
-            letter-spacing: 3px;
-            text-shadow: 0 3px 15px rgba(0,0,0,0.6);
-        }
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 35px;
-            font-weight: 400;
-            letter-spacing: 1px;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.6);
-        }
-        .btn-cta {
-            background-color: #D60000;
-            color: #fff;
-            padding: 15px 40px;
-            border-radius: 4px;
-            font-weight: 700;
-            font-size: 1.15rem;
-            transition: background 0.3s, transform 0.2s;
-            box-shadow: 0 4px 18px rgba(214, 0, 0, 0.4);
-            letter-spacing: 1px;
-        }
-        .btn-cta:hover {
-            background-color: #b30000;
-            transform: translateY(-2px);
-        }
+        .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 35px; }
+        .feature-card { background: #fff; padding: 45px 30px; border-radius: 6px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); text-align: center; border-top: 4px solid #111111; transition: transform 0.3s, border-color 0.3s; }
+        .feature-card:hover { transform: translateY(-5px); border-top-color: #D60000; }
+        .feature-card h3 { color: #111111; margin-bottom: 20px; font-size: 1.4rem; font-weight: 700; }
+        .feature-card p { color: #444444; font-size: 0.95rem; text-align: left; line-height: 1.7; }
 
-        /* コンテンツ共通 */
-        section {
-            padding: 90px 20px;
-            max-width: 1050px;
-            margin: 0 auto;
-        }
-        .section-title {
-            text-align: center;
-            font-size: 2.2rem;
-            color: #111111;
-            margin-bottom: 60px;
-            font-weight: 700;
-            letter-spacing: 1px;
-        }
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 45px;
-            height: 4px;
-            background-color: #D60000;
-            margin: 15px auto 0;
-        }
+        .equipments { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; margin-top: 20px; }
+        .equipment-card { background: #fff; padding: 35px 25px; border-radius: 6px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); text-align: center; border: 1px solid #eeeeee; transition: transform 0.3s, border-color 0.3s; }
+        .equipment-card:hover { transform: translateY(-4px); border-color: #D60000; }
+        .equipment-card .icon { font-size: 2.5rem; margin-bottom: 15px; display: block; }
+        .equipment-card h4 { font-size: 1.15rem; color: #111111; margin-bottom: 12px; font-weight: 700; }
+        .equipment-card p { font-size: 0.9rem; color: #555555; text-align: left; line-height: 1.6; }
 
-        /* 特長セクション */
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 35px;
-        }
-        .feature-card {
-            background: #fff;
-            padding: 45px 30px;
-            border-radius: 6px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
-            text-align: center;
-            border-top: 4px solid #111111;
-            transition: transform 0.3s, border-color 0.3s;
-        }
-        .feature-card:hover {
-            transform: translateY(-5px);
-            border-top-color: #D60000;
-        }
-        .feature-card h3 {
-            color: #111111;
-            margin-bottom: 20px;
-            font-size: 1.4rem;
-            font-weight: 700;
-        }
-        .feature-card p {
-            color: #444444;
-            font-size: 0.95rem;
-            text-align: left;
-            line-height: 1.7;
-        }
+        /* ネットワークボンディング強調バッジ */
+        .equipment-card.highlight { border: 2px solid #D60000; position: relative; }
+        .equipment-card.highlight::before { content: '★ NEW'; position: absolute; top: -1px; right: -1px; background: #D60000; color: #fff; font-size: 0.65rem; font-weight: 700; padding: 3px 8px; letter-spacing: .05em; }
 
-        /* 使用機材セクション */
-        .equipments {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-top: 20px;
-        }
-        .equipment-card {
-            background: #fff;
-            padding: 35px 25px;
-            border-radius: 6px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
-            text-align: center;
-            border: 1px solid #eeeeee;
-        }
-        .equipment-card .icon {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            display: block;
-        }
-        .equipment-card h4 {
-            font-size: 1.15rem;
-            color: #111111;
-            margin-bottom: 12px;
-            font-weight: 700;
-        }
-        .equipment-card p {
-            font-size: 0.9rem;
-            color: #555555;
-            text-align: left;
-            line-height: 1.6;
-        }
+        /* ボンディング図解エリア */
+        .bonding-visual { margin-top: 50px; background: #fff; border: 1px solid #eeeeee; border-radius: 6px; padding: 40px 30px; }
+        .bonding-visual h3 { font-size: 1.3rem; font-weight: 700; color: #111; margin-bottom: 8px; text-align: center; }
+        .bonding-visual .sub { font-size: .9rem; color: #666; text-align: center; margin-bottom: 30px; }
+        .bonding-diagram { display: flex; align-items: center; justify-content: center; gap: 0; flex-wrap: wrap; }
+        .b-lines { display: flex; flex-direction: column; gap: 10px; }
+        .b-line { display: flex; align-items: center; gap: 8px; background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 10px 16px; font-size: .85rem; font-weight: 700; color: #333; min-width: 180px; }
+        .b-line .dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+        .dot-starlink { background: #1a73e8; }
+        .dot-sim1 { background: #e8711a; }
+        .dot-sim2 { background: #34a853; }
+        .b-arrow { font-size: 1.8rem; color: #D60000; margin: 0 16px; font-weight: 900; }
+        .b-center { background: #111; color: #fff; border-radius: 6px; padding: 18px 22px; text-align: center; min-width: 150px; }
+        .b-center .label { font-size: .72rem; letter-spacing: .1em; color: rgba(255,255,255,.5); margin-bottom: 4px; text-transform: uppercase; }
+        .b-center .name { font-size: 1rem; font-weight: 700; color: #fff; }
+        .b-center .sub2 { font-size: .72rem; color: #D60000; margin-top: 4px; font-weight: 700; }
+        .b-right { display: flex; flex-direction: column; gap: 6px; align-items: flex-start; margin-left: 0; }
+        .b-result { background: #f0fff4; border: 1px solid #34a853; border-radius: 4px; padding: 8px 14px; font-size: .82rem; color: #1a5c2e; font-weight: 700; display: flex; align-items: center; gap: 6px; }
+        .b-result::before { content: '✓'; color: #34a853; }
 
-        /* お問い合わせセクション */
-        .contact-text {
-            text-align: center;
-            font-size: 1.1rem;
-            margin-bottom: 40px;
-            color: #333333;
-        }
-        .btn-contact {
-            display: block;
-            width: fit-content;
-            margin: 0 auto 30px;
-            background-color: #111111;
-            color: #fff;
-            padding: 16px 50px;
-            border-radius: 4px;
-            font-weight: 700;
-            font-size: 1.1rem;
-            transition: background 0.3s;
-            letter-spacing: 0.5px;
-        }
-        .btn-contact:hover {
-            background-color: #D60000;
-        }
+        .contact-text { text-align: center; font-size: 1.1rem; margin-bottom: 40px; color: #333333; }
+        .btn-contact { display: block; width: fit-content; margin: 0 auto 30px; background-color: #111111; color: #fff; padding: 16px 50px; border-radius: 4px; font-weight: 700; font-size: 1.1rem; transition: background 0.3s; letter-spacing: 0.5px; }
+        .btn-contact:hover { background-color: #D60000; }
+        .sns-container { display: flex; justify-content: center; gap: 20px; margin-top: 20px; }
+        .sns-btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 4px; font-size: 0.9rem; font-weight: 700; transition: opacity 0.3s, transform 0.2s; color: #fff; }
+        .sns-btn:hover { opacity: 0.9; transform: translateY(-2px); }
+        .btn-youtube { background-color: #FF0000; }
+        .btn-instagram { background: linear-gradient(45deg, #FFDC80, #F77737, #E1306C, #C13584, #405DE6); }
 
-        /* SNSリンクエリア（お問い合わせ内） */
-        .sns-container {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 20px;
-        }
-        .sns-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 20px;
-            border-radius: 4px;
-            font-size: 0.9rem;
-            font-weight: 700;
-            transition: opacity 0.3s, transform 0.2s;
-            color: #fff;
-        }
-        .sns-btn:hover {
-            opacity: 0.9;
-            transform: translateY(-2px);
-        }
-        .btn-youtube {
-            background-color: #FF0000;
-        }
-        .btn-instagram {
-            background: linear-gradient(45deg, #FFDC80, #F77737, #E1306C, #C13584, #405DE6);
-        }
+        footer { background-color: #111111; color: #aaaaaa; text-align: center; padding: 40px 20px; margin-top: 80px; font-size: 0.85rem; border-top: 4px solid #D60000; letter-spacing: 0.5px; }
+        .footer-sns { margin-bottom: 20px; display: flex; justify-content: center; gap: 25px; }
+        .footer-sns a { color: #aaaaaa; font-size: 0.95rem; font-weight: bold; transition: color 0.3s; }
+        .footer-sns a:hover { color: #ffffff; }
 
-        /* フッター */
-        footer {
-            background-color: #111111;
-            color: #aaaaaa;
-            text-align: center;
-            padding: 40px 20px;
-            margin-top: 80px;
-            font-size: 0.85rem;
-            border-top: 4px solid #D60000;
-            letter-spacing: 0.5px;
-        }
-        .footer-sns {
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-        }
-        .footer-sns a {
-            color: #aaaaaa;
-            font-size: 0.95rem;
-            font-weight: bold;
-            transition: color 0.3s;
-        }
-        .footer-sns a:hover {
-            color: #ffffff;
-        }
-
-        /* スマートフォン画面用の設定（レスポンシブ対応） */
         @media (max-width: 768px) {
-            .header-container { 
-                flex-direction: column; 
-                padding: 15px 20px; 
-            }
-            .logo-img { 
-                height: 45px; 
-                margin-bottom: 10px;
-            }
-            nav ul { 
-                margin-top: 10px; 
-                width: 100%;
-                justify-content: center;
-                flex-wrap: wrap;
-                gap: 8px;
-            }
-            nav ul li { 
-                margin: 0 6px; 
-            }
-            nav ul li a {
-                font-size: 0.9rem;
-            }
-            nav ul li .nav-sns {
-                padding: 3px 6px;
-                font-size: 0.85rem;
-            }
-            .hero {
-                height: auto;
-                padding: 70px 20px;
-            }
-            .hero h1 { 
-                font-size: 1.8rem; 
-                letter-spacing: 1px;
-                line-height: 1.4;
-            }
-            .hero p { 
-                font-size: 1.05rem; 
-                margin-bottom: 25px;
-            }
-            .btn-cta {
-                padding: 12px 30px;
-                font-size: 1.05rem;
-            }
-            section { 
-                padding: 50px 20px; 
-            }
-            .section-title {
-                font-size: 1.8rem;
-                margin-bottom: 40px;
-            }
-            .features, .equipments {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            .feature-card, .equipment-card {
-                padding: 30px 20px;
-            }
-            .sns-container {
-                flex-direction: column;
-                align-items: center;
-                gap: 12px;
-                width: 100%;
-                max-width: 300px;
-                margin: 0 auto;
-            }
-            .sns-btn {
-                width: 100%;
-                justify-content: center;
-            }
+            .header-container { flex-direction: column; padding: 15px 20px; }
+            .logo-img { height: 45px; margin-bottom: 10px; }
+            nav ul { margin-top: 10px; width: 100%; justify-content: center; flex-wrap: wrap; gap: 8px; }
+            nav ul li { margin: 0 6px; }
+            .hero { height: auto; padding: 70px 20px; }
+            .hero h1 { font-size: 1.8rem; letter-spacing: 1px; line-height: 1.4; }
+            .hero p { font-size: 1.05rem; margin-bottom: 25px; }
+            section { padding: 50px 20px; }
+            .section-title { font-size: 1.8rem; margin-bottom: 40px; }
+            .features, .equipments { grid-template-columns: 1fr; gap: 20px; }
+            .bonding-diagram { flex-direction: column; }
+            .b-arrow { transform: rotate(90deg); margin: 8px 0; }
+            .sns-container { flex-direction: column; align-items: center; gap: 12px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ヘッダー -->
     <header>
         <div class="header-container">
             <div class="logo-area">
@@ -383,7 +112,6 @@
                     <li><a href="#features">特長</a></li>
                     <li><a href="#equipment">使用機材</a></li>
                     <li><a href="#contact">お問い合わせ</a></li>
-                    <!-- 正規のYouTubeとInstagramのURLをセット -->
                     <li><a href="https://www.youtube.com/@Athleelive" target="_blank" class="nav-sns nav-youtube">YouTube</a></li>
                     <li><a href="https://www.instagram.com/athleelive" target="_blank" class="nav-sns nav-instagram">Instagram</a></li>
                 </ul>
@@ -391,14 +119,12 @@
         </div>
     </header>
 
-    <!-- メインビジュアル（スタジアム野球中継イメージ） -->
     <section class="hero">
         <h1>あの一瞬を、いつでも、どこからでも。</h1>
-        <p>アマチュア野球・スポーツ配信に特化した、高品質ライブ配信サービス「アスリーライブ」</p>
+        <p>アマチュア野球・スポーツ配信に特化した、4K対応の高品質ライブ配信サービス「アスリーライブ」</p>
         <a href="#contact" class="btn-cta">配信を依頼する</a>
     </section>
 
-    <!-- 特長セクション -->
     <section id="features">
         <h2 class="section-title">AthleeLiveの特長</h2>
         <div class="features">
@@ -414,17 +140,24 @@
                 <h3>ワンオペによる圧倒的な低価格</h3>
                 <p>無駄な人員や大きな中継車を必要としない、計算されたコンパクトな「ワンオペレーション運用」を確立。だからこそ、保護者会やチームに負担の少ない価格帯を守り続けます。</p>
             </div>
+            <div class="feature-card">
+                <h3>4K高画質ライブ配信に対応</h3>
+                <p>フルHDを超える4K解像度でのライブ配信が可能。ボールの軌道や選手の細かな動きまで鮮明に映し出し、まるで球場で観戦しているかのような臨場感をお届けします。<br><span style="font-size: 0.8rem; color: #888;">※4K配信は会場のネットワーク環境により対応できない場合があります。その場合はフルHD画質での配信となります。</span></p>
+            </div>
+            <div class="feature-card">
+                <h3>ネットワークボンディングで途切れない配信</h3>
+                <p>複数のモバイルSIM回線を束ねる「ネットワークボンディング技術」を採用。山間部・河川敷・郊外グラウンドなど電波の弱い場所でも、安定した高品質ライブ配信を実現します。</p>
+            </div>
         </div>
     </section>
 
-    <!-- 使用機材セクション -->
     <section id="equipment" style="border-top: 1px solid #eeeeee;">
         <h2 class="section-title">使用機材のご紹介</h2>
         <div class="equipments">
             <div class="equipment-card">
                 <span class="icon">🎥</span>
                 <h4>4K対応高倍率カメラ</h4>
-                <p>パナソニック製のプロ仕様カメラを使用。バックネット裏やスタンドからの定点撮影でも、破綻のない鮮明なフルHD/4Kクオリティの映像を確保します。</p>
+                <p>パナソニック製のプロ仕様カメラを使用。バックネット裏やスタンドからの定点撮影でも、破綻のない鮮明な映像をお届けします。ネットワーク環境が良好な会場では4K配信にも対応可能です。</p>
             </div>
             <div class="equipment-card">
                 <span class="icon">🔭</span>
@@ -433,32 +166,55 @@
             </div>
             <div class="equipment-card">
                 <span class="icon">💻</span>
-                <h4>専用ライブエンコーダー</h4>
-                <p>屋外の不安定なグラウンド環境でも安定して高品質な映像を送り出せる、独立型の配信用ハードウェア（YoloBox等）を導入。途切れにくい滑らかな中継実現します。</p>
+                <h4>専用ライブエンコーダー（YoloBox Extreme）</h4>
+                <p>屋外の不安定なグラウンド環境でも安定して高品質な映像を送り出せる、独立型の配信用ハードウェアを導入。マルチカメラ切替・リプレイ機能も搭載しています。</p>
+            </div>
+            <div class="equipment-card highlight">
+                <span class="icon">📡</span>
+                <h4>ネットワークボンディング</h4>
+                <p>キャリアの異なる複数のモバイルSIM回線を同時に束ねて使用する技術。1回線では不安定な環境でも、複数回線を合わせることで安定した高速通信を維持し、配信の途切れを防ぎます。</p>
+            </div>
+        </div>
+
+        <!-- ネットワークボンディング図解 -->
+        <div class="bonding-visual">
+            <h3>📶 ネットワークボンディングの仕組み</h3>
+            <p class="sub">複数の回線を「束ねる」ことで、1回線では不可能な安定性と速度を実現</p>
+            <div class="bonding-diagram">
+                <div class="b-lines">
+                    <div class="b-line"><span class="dot dot-starlink"></span>モバイル回線①（docomo）</div>
+                    <div class="b-line"><span class="dot dot-sim1"></span>モバイル回線②（au）</div>
+                    <div class="b-line"><span class="dot dot-sim2"></span>モバイル回線③（SoftBank）</div>
+                </div>
+                <div class="b-arrow">→</div>
+                <div class="b-center">
+                    <div class="label">Bonding</div>
+                    <div class="name">回線を束ねる</div>
+                    <div class="sub2">▶ 合算・冗長化</div>
+                </div>
+                <div class="b-arrow">→</div>
+                <div class="b-right">
+                    <div class="b-result">帯域幅が大幅アップ</div>
+                    <div class="b-result">1回線が切れても継続</div>
+                    <div class="b-result">山間部・河川敷でも安定</div>
+                    <div class="b-result">途切れないライブ配信</div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- お問い合わせセクション -->
     <section id="contact" style="background-color: #f4f5f6; max-width: 100%;">
         <div style="max-width: 1050px; margin: 0 auto; padding: 0 20px;">
             <h2 class="section-title">お問い合わせ</h2>
             <p class="contact-text">練習試合、公式戦、各種大会の配信スケジュール確保や、詳細なカスタマイズ・お見積りのご相談はお気軽にお問い合わせください。</p>
-            
             <a href="mailto:athleelive@gmail.com?subject=【アスリーライブ】配信のお問い合わせ・ご相談" class="btn-contact">メールで相談する</a>
-
             <div class="sns-container">
-                <a href="https://www.youtube.com/@Athleelive" target="_blank" class="sns-btn btn-youtube">
-                    <span>▶</span> YouTube チャンネル
-                </a>
-                <a href="https://www.instagram.com/athleelive" target="_blank" class="sns-btn btn-instagram">
-                    <span>📷</span> Instagramから問合せ
-                </a>
+                <a href="https://www.youtube.com/@Athleelive" target="_blank" class="sns-btn btn-youtube"><span>▶</span> YouTube チャンネル</a>
+                <a href="https://www.instagram.com/athleelive" target="_blank" class="sns-btn btn-instagram"><span>📷</span> Instagramから問合せ</a>
             </div>
         </div>
     </section>
 
-    <!-- フッター -->
     <footer>
         <div class="footer-sns">
             <a href="https://www.youtube.com/@Athleelive" target="_blank">YouTube</a>
